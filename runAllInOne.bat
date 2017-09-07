@@ -1,5 +1,6 @@
 @echo off
-:: best to use a video with different audio in the left and right channels
+:: use a video with different audio in the left and right channels
+:: initial test video had tapping in the left channel and counting in the right channel
 
 if EXIST "%1" (
     goto MAIN
@@ -7,50 +8,50 @@ if EXIST "%1" (
 goto ERROR1
 
 :MAIN
-:: stereo output, L=tapping, R=counting (do nothing, same as original)
+:: stereo output, L=tapping, R=counting (same as original)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -map_channel 0.1.0 ^
     -map_channel 0.1.1 ^
-    vid_stereoLR.mp4
+    vid_stereo010011.mp4
 
-:: stereo output, L=tapping, R=tapping
+:: mono output, tapping only (left channel only)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -map_channel 0.1.0 ^
-    vid_stereoLL.mp4
+    vid_mono010.mp4
 
-:: stereo output, L=counting, R=counting
+:: mono output, counting only (right channel only)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -map_channel 0.1.1 ^
-    vid_stereoRR.mp4
+    vid_mono011.mp4
 
-:: mono output, tapping and counting
+:: mono output, tapping and counting (left and right channel combined)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -ac 1 ^
-    vid_monoLR.mp4
+    vid_monoAC.mp4
 
-:: mono output, tapping only 
+:: mono output, tapping only (left channel only)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -map_channel 0.1.0 ^
     -ac 1 ^
-    vid_monoLL.mp4
+    vid_mono010AC.mp4
 
-:: mono output, counting only 
+:: mono output, counting only (right channel only)
 ffmpeg -y -i %1 ^
     -map 0:0 -map 0:1 ^
     -c:v copy ^
     -map_channel 0.1.1 ^
     -ac 1 ^
-    vid_monoRR.mp4
+    vid_mono011AC.mp4
 
 goto END
 
