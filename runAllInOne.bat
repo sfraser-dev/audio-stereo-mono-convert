@@ -54,7 +54,7 @@ ffmpeg -y -i %1 ^
     vid_mono011AC.mp4
 
 :: select the first video track and the first audio track, mono output, tapping and counting (left and right channel combined)
-ffmpeg -y -i %1 -map 0:v:0 -c:v copy -map 0:a:0 -ac 1 vid_mono0v00a0.mp4
+ffmpeg -y -i %1 -map 0:v:0 -c:v copy -map 0:a:0 -ac 1 vid_mono0v00a0AC.mp4
 
 goto END
 
