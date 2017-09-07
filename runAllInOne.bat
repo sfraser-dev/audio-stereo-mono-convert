@@ -53,8 +53,9 @@ ffmpeg -y -i %1 ^
     -ac 1 ^
     vid_mono011AC.mp4
 
-:: select the first video track and the first audio track, mono output, tapping and counting (left and right channel combined)
-ffmpeg -y -i %1 -map 0:v:0 -c:v copy -map 0:a:0 -ac 1 vid_mono0v00a0AC.mp4
+:: select the first video track from the input and the first audio track from the input, specify the required bitrate as "-ac 1" defaults to 64kb/s
+:: mono output, tapping and counting (left and right channel combined)
+ffmpeg -y -i %1 -map 0:v -c:v copy -map 0:a -ac 1 -b:a 128k vid_mono0v0aAC.mp4
 
 goto END
 
