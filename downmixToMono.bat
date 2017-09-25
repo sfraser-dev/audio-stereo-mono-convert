@@ -5,7 +5,7 @@
 
 :: Look for media containers with the following extension  
 SET CONTAINER_EXTN=mp4
-:: Extension of audio codec used in the media container
+:: Extension of audio codec used in the media containers
 SET AUDIO_EXTN=aac
 
 :: Recursively search for required media container
